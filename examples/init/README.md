@@ -103,7 +103,25 @@ You need to tell Git which files you don't need to be versioned and pushed to Gi
 Usually we place our code files into **src** directory.   
 **index.ts** file is a main 'entry point' file and doesn't contain a lot of code.
 
-##### 9. Run your project
+##### 9. Add typescript support for p5.js
+First, in terminal window run command `npm install @types/p5`    
+ 
+Second, create file **global.d.ts** like this:
+
+```typescript
+import module = require('p5');
+import * as p5Global from 'p5/global'
+
+export = module;
+export as namespace p5;
+declare global {
+    interface Window {
+        p5: typeof module,
+    }
+}
+```
+
+##### 10. Run your project
 Just open terminal window and write `npm run start` - npm will compile you project, start live server and open web-browser at http://localhost:8080  
 
 *When you change your code files, live server will update web page automatically, you don't need to restart it every time you chage something.*
